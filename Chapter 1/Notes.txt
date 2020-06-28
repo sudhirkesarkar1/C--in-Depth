@@ -1,0 +1,58 @@
+Chapter One introduces variety of C# features.
+This file just summarises few important examples/features discussed in this chapter.
+
+C# Features from Chapter one : 
+
+Anonymous types
+-helps to address the downside of C#'s statically typed nature: verbosity.
+-Anonymous types allows data shape to be expressed concisely without losing the benefits of static typing.
+-Anonymous types help only within a single block of code; for example, you can’t use them as method parameters or return types.
+-Example of Anonymous type: 
+   var book = new { Title = "Lost in the Snow", Author = "Holly Webb" };
+   string title = book.Title;
+   string author = book.Author;
+
+Implicitly typed local variables (var)
+-With Implicit typing we can avoid the redundancy of explicit specification of variable that is initialized in the same statement by calling the constructor of that type.
+-In below example map2 variable is still statically typed, but you didn’t have to write the type explicitly
+   Dictionary<string, string> map1 = new Dictionary<string, string>();
+   var map2 = new Dictionary<string, string>(); 
+
+
+Object initializers and Collection initializers
+-Usage of object initializers and collection initializers allows you to specify a set of properties to set on a new object or items to add to a new collection within a single expression.
+
+Example 1:                                                       Example2: 
+                                                                   //The object and collection initializers makes this example so much clearer
+var customer = new Customer();                                     var order = new Order
+customer.Name = "Jon";                                             {
+customer.Address = "UK";                                              OrderId = "xyz",
+var item1 = new OrderItem();                                          Customer = new Customer{Name = "Jon", Address = "UK"},
+item1.ItemId = "abcd123";                                             Items = 
+item1.Quantity = 1;                                                   {
+var item2 = new OrderItem();                                             new OrderItem{ItemId = "abcd123",Quantity = 1},
+item2.ItemId = "fghi456";                                                new OrderItem{ItemId = "abcd123",Quantity = 1}
+item2.Quantity = 2;                                                   }
+var order = new Order();                                           };
+order.OrderId = "xyz";                                              
+order.Customer = customer;                                              
+order.Items.Add(item1);                                              
+order.Items.Add(item2);                                              
+
+
+Expression-bodied-members
+
+-Please go through below doc and it's example to know how expression-bodied-members removes code ceremony and improves readability.
+   https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members
+
+Example 1:                                                          Eample2: 
+                                                                    // With expression-bodied-members
+public int Count { get { return list.Count; } }                     public int Count => list.Count;
+
+public IEnumerator<string> GetEnumerator()                          public IEnumerator<string> GetEnumerator() => list.GetEnumerator();
+{ 
+ return list.GetEnumerator();
+}
+
+
+
